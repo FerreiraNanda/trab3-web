@@ -1,0 +1,27 @@
+:root {
+  --color-light: #FDFBEE;
+  --color-primary: #57B4BA;
+  --color-dark: #015551;
+  --color-accent: #FE4F2D;
+  --color-text: #333333;
+  --color-gray: #e0e0e0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--color-light);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
