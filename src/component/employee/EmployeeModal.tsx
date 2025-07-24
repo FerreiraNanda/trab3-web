@@ -11,23 +11,26 @@ const EmployeeModal = (props: Props) => {
 return (
         <div className="modal-overlay">
             <div className="modal-content">
-            <button className="close-btn" onClick={onClose} style={{ background: "none"}}><CloseIcon/></button>
-            <h3>Detalhes do Funcionário</h3>
-
-            <div className="detail-row">
-                <span className="detail-label">Nome:</span>
-                <span className="detail-value">{data.name}</span>
-            </div>
-
-            <div className="detail-row">
-                <span className="detail-label">Matrícula:</span>
-                <span className="detail-value">{data.registrationNumber}</span>
-            </div>
-
-            <div className="detail-row">
-                <span className="detail-label">Cargo:</span>
-                <span className="detail-value">{data.position}</span>
-            </div>
+                <div className="modal-header">
+                    <h2>Detalhes do Funcionário</h2>
+                    <button className="touch-button  close-btn" onClick={onClose} style={{ background: "white"}}>
+                        <CloseIcon/>
+                        </button>
+                </div>
+                <div className="detail-grid">
+                    <div className="detail-item">
+                            <span className="detail-label">Nome:</span>
+                            <span className="detail-value">{data.name}</span>
+                    </div>
+                    <div className="detail-item"> 
+                            <span className="detail-label">Matrícula:</span>
+                            <span className="detail-value">{data.registrationNumber}</span>
+                    </div>
+                    <div className="detail-item">
+                            <span className="detail-label">Cargo:</span>
+                            <span className="detail-value">{data.position}</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

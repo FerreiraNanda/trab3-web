@@ -33,11 +33,11 @@ const LoanList = ({ list, onDeleteClickHnd, onEdit, onReturn }: Props) => {
     };
 
 return (
-    <div className="table-container">
+    <div>
         <article>
             <h3 className="list-header">Empréstimo Registrados</h3>
         </article>
-        <table className="compact-table">
+        <table>
             <thead>
                 <tr>
                     <th>Livro</th>
@@ -56,8 +56,10 @@ return (
                         <td data-label="Data Empréstimo">{formatDate(loan.loanDate)}</td>
                         <td data-label="Data Devolução">{formatDate(loan.returnDate)}</td>
                         <td data-label="Status">{getStatus(loan)}</td>
+
                         <td data-label="Ações">
-                            <div className="table-actions" style={{ display: "flex", gap: "0.5rem" }}>
+
+                            <div style={{ display: "flex", gap: "0.5rem" }}>
                                 <button
                                 aria-label="Visualizar"
                                 onClick={() => viewLoan(loan)}

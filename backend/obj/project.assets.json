@@ -3333,11 +3333,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fernanda/sistema-emprestimo-livros/backend/EmprestimoLivrosAPI.csproj",
+      "projectUniqueName": "/home/fernanda/trab3-web/backend/EmprestimoLivrosAPI.csproj",
       "projectName": "EmprestimoLivrosAPI",
-      "projectPath": "/home/fernanda/sistema-emprestimo-livros/backend/EmprestimoLivrosAPI.csproj",
+      "projectPath": "/home/fernanda/trab3-web/backend/EmprestimoLivrosAPI.csproj",
       "packagesPath": "/home/fernanda/.nuget/packages/",
-      "outputPath": "/home/fernanda/sistema-emprestimo-livros/backend/obj/",
+      "outputPath": "/home/fernanda/trab3-web/backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/fernanda/.nuget/NuGet/NuGet.Config"

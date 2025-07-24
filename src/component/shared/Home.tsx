@@ -407,179 +407,200 @@ const Home = () => {
 
     return(
         <>
+        <div className="app-container">
             <article className="article-header">
                 <header>
-                    <h1>Sistema de Empréstimo de Livros</h1>
+                    <h1 className="main-title">Sistema de Empréstimo de Livros</h1>
                 </header>
             </article>
-            <nav className="tab-navigation">
-                <button 
-                    className={activeTab === 'books' ? 'active' : ''}
-                    onClick={() => setActiveTab('books')}> Livros </button>
-                <button 
-                    className={activeTab === 'users' ? 'active' : ''} onClick={() => setActiveTab('users')}> Usuários </button>
-                <button 
-                    className={activeTab === 'loans' ? 'active' : ''} onClick={() => setActiveTab('loans')}> Empréstimos </button>
-                <button 
-                    className={activeTab === 'employees' ? 'active' : ''} onClick={() => setActiveTab('employees')}> Funcionários </button>
+
+            <nav className="tab-navigation-container">
+                <div className="tab-buttons-container">
+                    <button 
+                    className={`tab-button ${activeTab === 'books' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('books')}
+                    >
+                    Livros
+                    </button>
+                    <button 
+                    className={`tab-button ${activeTab === 'users' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('users')}
+                    >
+                    Usuários
+                    </button>
+                    <button 
+                    className={`tab-button ${activeTab === 'loans' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('loans')}
+                    >
+                    Empréstimos
+                    </button>
+                    <button 
+                    className={`tab-button ${activeTab === 'employees' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('employees')}
+                    >
+                    Funcionários
+                    </button>
+                </div>
             </nav>
-
-            {activeTab === 'books' && (
-                <>
-                    {loadingBooks && <div className="loading-message">Carregando livros...</div>}
-                    {errorBooks && <div className="error-message" style={{ color: 'red' }}>Erro: {errorBooks}</div>}
-
-                    {!loadingBooks && !errorBooks && (
+                <main className="content-container">
+                            {activeTab === 'books' && (
                         <>
-                            {bookPage === BookPageEnum.list && (
+                            {loadingBooks && <div className="loading-message">Carregando livros...</div>}
+                            {errorBooks && <div className="error-message" style={{ color: 'red' }}>Erro: {errorBooks}</div>}
+
+                            {!loadingBooks && !errorBooks && (
                                 <>
-                                    <button 
-                                        onClick={() => setBookPage(BookPageEnum.add)} className="add-button"> Adicionar Livro 
+                                    {bookPage === BookPageEnum.list && (
+                                        <>
+                                            <button 
+                                                onClick={() => setBookPage(BookPageEnum.add)} className="add-button"> Adicionar Livro 
+                                            </button>
+                                            <BookList
+                                            generosDisponiveis={generosDisponiveis}
+                                            employees={employeeList}
+                                            list={bookList} 
+                                            onDeleteClickHnd={deleteBook}
+                                            onEdit={editBookData}
+                                            />
+                                        </>
+                                    )}
+                                    {bookPage === BookPageEnum.add && (
+                                        <AddBook 
+                                            generosDisponiveis={generosDisponiveis}
+                                            onBackBtnClickHnd={() => setBookPage(BookPageEnum.list)}
+                                            onSubmitClickHnd={addBook}
+                                        />
+                                    )}
+                                    {bookPage === BookPageEnum.edit && dataToEditBook && (
+                                        <EditBook
+                                            generosDisponiveis={generosDisponiveis}
+                                            data={dataToEditBook}
+                                            onBackBtnClickHnd={() => setBookPage(BookPageEnum.list)}
+                                            onUpdateClickHnd={updateBookData}
+                                        />
+                                    )}
+                                </>
+                            )}
+                        </>
+                    )}
+
+                    {activeTab === 'users' && (
+                        <>
+                            {showUserPage === UserPageEnum.list && (
+                                <button 
+                                    onClick={() => setShowUserPage(UserPageEnum.add)} 
+                                    className="add-button"
+                                > 
+                                    Adicionar Usuário 
+                                </button>
+                            )}
+
+                            {loadingUsers && <div>Carregando Usuários...</div>}
+                            {errorUsers && <div className="error-message">Erro: {errorUsers}</div>}
+
+                            {!loadingUsers && !errorUsers && (
+                                <>
+                                    {showUserPage === UserPageEnum.list && (
+                                        <UserList 
+                                            list={userList}
+                                            onDeleteClickHnd={deleteUser}
+                                            onEdit={editUserData}
+                                        />
+                                    )}
+                                    {showUserPage === UserPageEnum.add && (
+                                        <AddUser 
+                                            onBackBtnClickHnd={() => setShowUserPage(UserPageEnum.list)}
+                                            onSubmitClickHnd={addUser}
+                                        />
+                                    )}
+                                    {showUserPage === UserPageEnum.edit && userToEdit && (
+                                        <EditUser 
+                                            data={userToEdit}
+                                            onBackBtnClickHnd={() => setShowUserPage(UserPageEnum.list)} 
+                                            onUpdateClickHnd={updateUserData}
+                                        />
+                                    )}
+                                </>
+                            )}
+                        </>
+                    )}
+
+                    {activeTab === 'loans' && (
+                        <>
+                            {loanPage === LoanPageEnum.list && (
+                                <>
+                                    <button onClick={() => setLoanPage(LoanPageEnum.add)} className="add-button"
+                                        disabled={bookList.filter(b => b.disponivel).length === 0 || userList.length === 0 || employeeList.length === 0}> Registrar Empréstimo
                                     </button>
-                                    <BookList
-                                    generosDisponiveis={generosDisponiveis}
-                                    employees={employeeList}
-                                    list={bookList} 
-                                    onDeleteClickHnd={deleteBook}
-                                    onEdit={editBookData}
+                                    {bookList.filter(b => b.disponivel).length === 0 && (
+                                        <p className="warning">Nenhum livro disponível para empréstimo</p>
+                                    )}
+                                    {userList.length === 0 && (
+                                        <p className="warning">Nenhum usuário cadastrado</p>
+                                    )}
+                                    {employeeList.length === 0 && (
+                                        <p className="warning">Nenhum funcionário cadastrado</p>
+                                    )}
+                                    <LoanList 
+                                        list={loanList}
+                                        onDeleteClickHnd={deleteLoan}
+                                        onEdit={editLoanData}
+                                        onReturn={returnLoan}                       
                                     />
                                 </>
                             )}
-                            {bookPage === BookPageEnum.add && (
-                                <AddBook 
-                                    generosDisponiveis={generosDisponiveis}
-                                    onBackBtnClickHnd={() => setBookPage(BookPageEnum.list)}
-                                    onSubmitClickHnd={addBook}
-                                />
+                            {loanPage === LoanPageEnum.add && (
+                                <AddLoan 
+                                    books={bookList.filter(b => b.disponivel)}
+                                    users={userList}
+                                    employees={employeeList}
+                                    onBackBtnClickHnd={() => setLoanPage(LoanPageEnum.list)}
+                                    onSubmitClickHnd={addLoan}/>
                             )}
-                            {bookPage === BookPageEnum.edit && dataToEditBook && (
-                                <EditBook
-                                    generosDisponiveis={generosDisponiveis}
-                                    data={dataToEditBook}
-                                    onBackBtnClickHnd={() => setBookPage(BookPageEnum.list)}
-                                    onUpdateClickHnd={updateBookData}
+                            {loanPage === LoanPageEnum.edit && dataToEditLoan && (
+                                <EditLoan 
+                                        data={dataToEditLoan}
+                                        onBackBtnClickHnd={() => setLoanPage(LoanPageEnum.list)}
+                                        onUpdateClickHnd={updateLoanData}
+                                        books={bookList}
+                                        users={userList}
+                                        employees={employeeList}
                                 />
                             )}
                         </>
                     )}
-                </>
-            )}
 
-            {activeTab === 'users' && (
-                <>
-                    {showUserPage === UserPageEnum.list && (
-                        <button 
-                            onClick={() => setShowUserPage(UserPageEnum.add)} 
-                            className="add-button"
-                        > 
-                            Adicionar Usuário 
-                        </button>
-                    )}
-
-                    {loadingUsers && <div>Carregando Usuários...</div>}
-                    {errorUsers && <div className="error-message">Erro: {errorUsers}</div>}
-
-                    {!loadingUsers && !errorUsers && (
+                    {activeTab === 'employees' && (
                         <>
-                            {showUserPage === UserPageEnum.list && (
-                                <UserList 
-                                    list={userList}
-                                    onDeleteClickHnd={deleteUser}
-                                    onEdit={editUserData}
+                            {employeePage === EmployeePageEnum.list && (
+                                <>
+                                    <button 
+                                        onClick={() => setEmployeePage(EmployeePageEnum.add)} className="add-button"> Adicionar Funcionário
+                                    </button>
+                                    <EmployeeList 
+                                        list={employeeList}
+                                        onDeleteClickHnd={deleteEmployee}
+                                        onEdit={editEmployeeData}
+                                    />
+                                </>
+                            )}
+                            {employeePage === EmployeePageEnum.add && (
+                                <AddEmployee 
+                                    onBackBtnClickHnd={() => setEmployeePage(EmployeePageEnum.list)}
+                                    onSubmitClickHnd={addEmployee}
                                 />
                             )}
-                            {showUserPage === UserPageEnum.add && (
-                                <AddUser 
-                                    onBackBtnClickHnd={() => setShowUserPage(UserPageEnum.list)}
-                                    onSubmitClickHnd={addUser}
-                                />
-                            )}
-                            {showUserPage === UserPageEnum.edit && userToEdit && (
-                                <EditUser 
-                                    data={userToEdit}
-                                    onBackBtnClickHnd={() => setShowUserPage(UserPageEnum.list)} 
-                                    onUpdateClickHnd={updateUserData}
+                            {employeePage === EmployeePageEnum.edit && dataToEditEmployee && (
+                                <EditEmployee
+                                    data={dataToEditEmployee}
+                                    onBackBtnClickHnd={() => setEmployeePage(EmployeePageEnum.list)}
+                                    onUpdateClickHnd={updateEmployeeData}
                                 />
                             )}
                         </>
                     )}
-                </>
-            )}
-
-            {activeTab === 'loans' && (
-                <>
-                    {loanPage === LoanPageEnum.list && (
-                        <>
-                            <button onClick={() => setLoanPage(LoanPageEnum.add)} className="add-button"
-                                disabled={bookList.filter(b => b.disponivel).length === 0 || userList.length === 0 || employeeList.length === 0}> Registrar Empréstimo
-                            </button>
-                            {bookList.filter(b => b.disponivel).length === 0 && (
-                                <p className="warning">Nenhum livro disponível para empréstimo</p>
-                            )}
-                            {userList.length === 0 && (
-                                <p className="warning">Nenhum usuário cadastrado</p>
-                            )}
-                            {employeeList.length === 0 && (
-                                <p className="warning">Nenhum funcionário cadastrado</p>
-                            )}
-                            <LoanList 
-                                list={loanList}
-                                onDeleteClickHnd={deleteLoan}
-                                onEdit={editLoanData}
-                                onReturn={returnLoan}                       
-                            />
-                        </>
-                    )}
-                    {loanPage === LoanPageEnum.add && (
-                        <AddLoan 
-                            books={bookList.filter(b => b.disponivel)}
-                            users={userList}
-                            employees={employeeList}
-                            onBackBtnClickHnd={() => setLoanPage(LoanPageEnum.list)}
-                            onSubmitClickHnd={addLoan}/>
-                    )}
-                    {loanPage === LoanPageEnum.edit && dataToEditLoan && (
-                        <EditLoan 
-                                data={dataToEditLoan}
-                                onBackBtnClickHnd={() => setLoanPage(LoanPageEnum.list)}
-                                onUpdateClickHnd={updateLoanData}
-                                books={bookList}
-                                users={userList}
-                                employees={employeeList}
-                        />
-                    )}
-                </>
-            )}
-
-            {activeTab === 'employees' && (
-                <>
-                    {employeePage === EmployeePageEnum.list && (
-                        <>
-                            <button 
-                                onClick={() => setEmployeePage(EmployeePageEnum.add)} className="add-button"> Adicionar Funcionário
-                            </button>
-                            <EmployeeList 
-                                list={employeeList}
-                                onDeleteClickHnd={deleteEmployee}
-                                onEdit={editEmployeeData}
-                            />
-                        </>
-                    )}
-                    {employeePage === EmployeePageEnum.add && (
-                        <AddEmployee 
-                            onBackBtnClickHnd={() => setEmployeePage(EmployeePageEnum.list)}
-                            onSubmitClickHnd={addEmployee}
-                        />
-                    )}
-                    {employeePage === EmployeePageEnum.edit && dataToEditEmployee && (
-                        <EditEmployee
-                            data={dataToEditEmployee}
-                            onBackBtnClickHnd={() => setEmployeePage(EmployeePageEnum.list)}
-                            onUpdateClickHnd={updateEmployeeData}
-                        />
-                    )}
-                </>
-            )}
+                </main>
+            </div>      
         </>
     );
 }

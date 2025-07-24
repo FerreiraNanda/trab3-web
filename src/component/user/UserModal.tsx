@@ -13,23 +13,24 @@ const UserModal = (props: Props) => {
     
         <div className="modal-overlay">
             <div className="modal-content">
-           <button className="close-btn" onClick={onClose} style={{ background: "none"}}><CloseIcon/></button>
-            <h2>Detalhes do Empréstimo</h2>
-
-            <div className="detail-row">
-                <span className="detail-label">Nome:</span>
-                <span className="detail-value">{data.name}</span>
-            </div>
-
-            <div className="detail-row">
-                <span className="detail-label">Email:</span>
-                <span className="detail-value">{data.email}</span>
-            </div>
-
-            <div className="detail-row">
-                <span className="detail-label">Telefone:</span>
-                <span className="detail-value">{data.telefone || "Não informado"}</span>
-            </div>
+                    <div className="modal-header">
+                        <h2>Detalhes do Usuário</h2>
+                        <button className="touch-button  close-btn" onClick={onClose} style={{ background: "none"}}><CloseIcon/></button>
+                    </div>
+             <div className="detail-grid">
+                    <div className="detail-item">
+                            <span className="detail-label">Nome:</span>
+                            <span className="detail-value">{data.name}</span>
+                    </div>
+                    <div className="detail-item"> 
+                            <span className="detail-label">E-mail:</span>
+                            <span className="detail-value">{data.email}</span>
+                    </div>
+                    <div className="detail-item"> 
+                            <span className="detail-label">Telefone:</span>
+                            <span className="detail-value">{data.telefone}</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

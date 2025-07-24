@@ -49,14 +49,14 @@ const BookList = ({ list, onDeleteClickHnd, onEdit }: Props) => {
                             <td data-label="ISBN">{book.isbn}</td>
                             <td data-label="Disponível">{book.disponivel ? "Sim" : "Não"}</td>
                             <td data-label="Ações">
-                                <div className="table-actions" style={{ display: 'flex', gap: '0.5rem' }}>
-                                    <button aria-label="Visualizar" className="action-btn view-btn" onClick={() => viewBook(book)} title="Visualizar" style={{ background: "none"}}>
+                                <div  style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <button aria-label="Visualizar" onClick={() => viewBook(book)} title="Visualizar" style={{ background: "none"}}>
                                         <VisibilityIcon />
                                     </button>
-                                    <button aria-label="Editar" className="action-btn edit-btn" onClick={() => onEdit(book)} title="Editar" style={{ background: "none"}}>
+                                    <button aria-label="Editar" onClick={() => onEdit(book)} title="Editar" style={{ background: "none"}}>
                                         <EditIcon />
                                     </button>
-                                    <button aria-label="Excluir" className="action-btn delete-btn" onClick={() => onDeleteClickHnd(book)} title="Excluir" style={{ background: "none"}}>
+                                    <button aria-label="Excluir"  onClick={() => onDeleteClickHnd(book)} title="Excluir" style={{ background: "none"}}>
                                         <CloseIcon />
                                     </button>
                                 </div>
