@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/trab3-web/static/css/main.98676095.css",
+    "main.js": "/trab3-web/static/js/main.8aa0817c.js",
+    "static/js/453.c5b2141e.chunk.js": "/trab3-web/static/js/453.c5b2141e.chunk.js",
+    "index.html": "/trab3-web/index.html",
+    "main.98676095.css.map": "/trab3-web/static/css/main.98676095.css.map",
+    "main.8aa0817c.js.map": "/trab3-web/static/js/main.8aa0817c.js.map",
+    "453.c5b2141e.chunk.js.map": "/trab3-web/static/js/453.c5b2141e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.98676095.css",
+    "static/js/main.8aa0817c.js"
+  ]
+}
