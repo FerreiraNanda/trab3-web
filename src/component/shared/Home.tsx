@@ -97,21 +97,21 @@ const Home = () => {
     };
 
     const fetchLoanList = async () => {
-        try {
-            const response = await fetch("http://localhost:5103/api/Loans"); 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data: ILoan[] = await response.json();
-            setLoanList(data);
-            await fetchBooksFromApi(); 
-            await fetchUsersFromApi(); 
-            await fetchEmployeeList();
-        } catch (error) {
-            console.error("Erro ao buscar empréstimos:", error);
-            setLoanList([]);
+    try {
+        const response = await fetch("http://localhost:5103/api/Loans"); 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    };
+        const data: ILoan[] = await response.json();
+        setLoanList(data);
+        await fetchBooksFromApi(); 
+        await fetchUsersFromApi(); 
+        await fetchEmployeeList();
+    } catch (error) {
+        console.error("Erro ao buscar empréstimos:", error);
+        setLoanList([]);
+    }
+};
 
     useEffect(() => {
         fetchUsersFromApi();
@@ -331,11 +331,29 @@ const Home = () => {
     };
 
     const returnLoan = async (data: ILoan) => {
-        if (!window.confirm(`Tem certeza que deseja marcar o empréstimo do livro "${data.book?.titulo || 'ID ' + data.book}" como devolvido?`)) {
-            return;
+    if (!window.confirm(`Tem certeza que deseja marcar o empréstimo do livro "${data.book?.titulo || 'ID ' + data.book}" como devolvido?`)) {
+        return;
+    }
+    try {
+        // Chamando o endpoint dedicado de devolução no backend
+        const response = await fetch(`http://localhost:5103/api/Loans/${data.id}/devolver`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            // Não precisa de body, o endpoint já sabe o que fazer com o ID
+        });
+
+        if (response.ok) {
+            alert("Livro devolvido com sucesso!");
+            // Recarregue a lista de empréstimos e livros para refletir a mudança de status
+            await fetchLoanList(); 
+        } else {
+            const errorData = await response.json();
+            throw new Error(`Falha ao marcar como devolvido: ${response.status} - ${errorData.message || response.statusText}`);
         }
-        const updatedLoan = { ...data, returned: true };
-        await updateLoanData(updatedLoan);
+    } catch (error: any) {
+        console.error("Erro ao devolver livro via API:", error);
+        alert(`Erro ao devolver livro: ${error.message}`);
+    }
     };
 
     const addEmployee = async (data: IEmployee) => { 
