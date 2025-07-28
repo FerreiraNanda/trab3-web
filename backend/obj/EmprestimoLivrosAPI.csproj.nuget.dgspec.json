@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/fernanda/trab3-web/backend/EmprestimoLivrosAPI.csproj": {}
+    "/home/fernanda/trab3-web-1/backend/EmprestimoLivrosAPI.csproj": {}
   },
   "projects": {
-    "/home/fernanda/trab3-web/backend/EmprestimoLivrosAPI.csproj": {
+    "/home/fernanda/trab3-web-1/backend/EmprestimoLivrosAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fernanda/trab3-web/backend/EmprestimoLivrosAPI.csproj",
+        "projectUniqueName": "/home/fernanda/trab3-web-1/backend/EmprestimoLivrosAPI.csproj",
         "projectName": "EmprestimoLivrosAPI",
-        "projectPath": "/home/fernanda/trab3-web/backend/EmprestimoLivrosAPI.csproj",
+        "projectPath": "/home/fernanda/trab3-web-1/backend/EmprestimoLivrosAPI.csproj",
         "packagesPath": "/home/fernanda/.nuget/packages/",
-        "outputPath": "/home/fernanda/trab3-web/backend/obj/",
+        "outputPath": "/home/fernanda/trab3-web-1/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/fernanda/.nuget/NuGet/NuGet.Config"

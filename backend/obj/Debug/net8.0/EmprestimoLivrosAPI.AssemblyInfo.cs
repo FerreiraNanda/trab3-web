@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EmprestimoLivrosAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dfdc2c853e36a82f64a4164109b75fbbd17c8777")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb6e23f947c3a2b4440dc8fddcb8d1bfb646588b")]
 [assembly: System.Reflection.AssemblyProductAttribute("EmprestimoLivrosAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EmprestimoLivrosAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vq7S/amE7Tk=",
+  "dgSpecHash": "BMCvASO+L24=",
   "success": true,
-  "projectFilePath": "/home/fernanda/trab3-web/backend/EmprestimoLivrosAPI.csproj",
+  "projectFilePath": "/home/fernanda/trab3-web-1/backend/EmprestimoLivrosAPI.csproj",
   "expectedPackageFiles": [
     "/home/fernanda/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/fernanda/.nuget/packages/microsoft.aspnetcore.openapi/8.0.16/microsoft.aspnetcore.openapi.8.0.16.nupkg.sha512",
